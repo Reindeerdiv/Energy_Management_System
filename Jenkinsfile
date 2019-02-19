@@ -1,12 +1,10 @@
 pipeline{
     agent{
-        docker {
-        image 'maven:3-alpine'
-        args  '-v /tmp:/tmp'
-        }
+        label "docker-linex"
     }
     stages{
         stage("Build"){
+            agent { docker 'maven:3-alpine' }
             steps{
                 echo "nice to see you"
                 sh 'mvn -B clean verify'
